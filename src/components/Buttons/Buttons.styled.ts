@@ -2,30 +2,28 @@ import styled from "styled-components";
 
 export const BaseButton = styled.button`
   cursor: pointer;
+  font-size: 2em;
   height: 50px;
-  width: 100%;
+  padding: 0 50px;
+  font-size: 1em;
+  font-weight: bold;
   margin: 5px;
   border: none;
-  border-radius: 25px;
-  color: ${({ theme }) => theme.colors.lightBackground};
+  border-radius: ${({ theme }) => theme.borderRadius};
   transition: 0.3s linear;
-
   &:hover {
     opacity: 80%;
   }
 `;
 
-export const PrimaryButton = styled(BaseButton)<{ border?: boolean }>`
-  background: ${({ theme }) =>
-    `linear-gradient(270deg, ${theme.colors.accentPrimary} 0%, ${theme.colors.accentSecondary} 100%)`};
-  color: ${({ theme }) => theme.colors.lightBackground};
-  border: ${({ border, theme }) =>
-    border ? `1px solid ${theme.colors.lightBackground}` : "none"};
+export const PrimaryButton = styled(BaseButton)`
+  background: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.secondary};
+  border: ${({ theme }) => `1px solid ${theme.colors.secondary}`};
 `;
 
-export const SecondaryButton = styled(BaseButton)<{ border?: boolean }>`
-  background: ${({ theme }) => theme.colors.lightBackground};
-  color: ${({ theme }) => theme.colors.accentPrimary};
-  border: ${({ border, theme }) =>
-    border ? `1px solid ${theme.colors.accentPrimary}` : "none"};
+export const SecondaryButton = styled(BaseButton)`
+  background: ${({ theme }) => theme.colors.secondary};
+  color: ${({ theme }) => theme.colors.primary};
+  border: ${({ theme }) => `1px solid ${theme.colors.primary}`};
 `;

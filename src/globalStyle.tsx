@@ -1,7 +1,18 @@
 import { createGlobalStyle } from "styled-components";
 import bgImg from "./img/memphis-mini.png";
+import PlayfairDisplay from "./fonts/PlayfairDisplay-VariableFont_wght.ttf";
+import PlayfairDisplayItalic from "./fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf";
 
 export const GlobalStyle = createGlobalStyle`
+
+@font-face {
+        font-family: 'Playfair Display';
+        src: local('Playfair Display'), local('Playfair Display'),
+        url(${PlayfairDisplay}) format('woff2'),
+        url(${PlayfairDisplayItalic}) format('woff');
+        font-weight: 300;
+        font-style: normal;
+    }
 
 html, body {
 height: 100%;
@@ -24,9 +35,7 @@ height: 100%;
     justify-content: center;
     text-rendering: optimizeLegibility;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    font-family: 'Play Fair';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

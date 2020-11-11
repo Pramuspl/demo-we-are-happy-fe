@@ -7,7 +7,8 @@ import {
   LoginMutation,
   useLoginMutation,
 } from "../../generated/graphql";
-import { LoginContainer } from "./Auth.styled";
+import { LoginContainer, Logo } from "./Auth.styled";
+import logo from "../../img/logo.png";
 
 export const Auth = () => {
   const [username, setUsername] = useState<string>("");
@@ -36,7 +37,7 @@ export const Auth = () => {
   }
   return (
     <LoginContainer>
-      <span>Auth</span>
+      <Logo src={logo} alt="logo" />
       <Input
         id="username"
         label="Username"
@@ -49,7 +50,7 @@ export const Auth = () => {
         value={password}
         onChange={(event) => setPassword(event.target.value)}
       />
-      <PrimaryButton onClick={() => loginMutation()}>Log In</PrimaryButton>
+      <PrimaryButton onClick={() => loginMutation()}>Login</PrimaryButton>
     </LoginContainer>
   );
 };

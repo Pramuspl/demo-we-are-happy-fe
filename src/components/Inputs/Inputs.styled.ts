@@ -20,17 +20,21 @@ export const InputContainer = styled.div`
 
 export const StyledInput = styled.input`
   box-sizing: border-box;
-  color: ${({ theme }) => theme.colors.accentPrimary};
+  color: ${({ theme }) => theme.colors.primary};
   font-size: 16px;
   height: 38px;
   width: 100%;
-  border: 1px solid #c4c4e8;
+  border: 1px solid ${({ theme }) => theme.colors.primary};
   border-radius: 4px;
   padding: 0 10px;
 
   &:active,
   &:hover {
-    border: 1px solid ${({ theme }) => theme.colors.accentPrimary};
+    border: 1px solid ${({ theme }) => theme.colors.primary};
+  }
+
+  &:focus {
+    outline-color: ${({ theme }) => theme.colors.primary};
   }
 
   &::placeholder {
@@ -50,7 +54,7 @@ export const StyledSelect = styled.select`
 
   &:active,
   &:hover {
-    border: 1px solid ${({ theme }) => theme.colors.accentPrimary};
+    border: 1px solid ${({ theme }) => theme.colors.primary};
   }
 
   &::placeholder {
