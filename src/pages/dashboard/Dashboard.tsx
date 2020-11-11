@@ -1,7 +1,7 @@
 import { ApolloError } from "@apollo/client";
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import Modal from "react-modal";
+
 import { format } from "date-fns";
 import {
   ImageCard,
@@ -27,6 +27,7 @@ import happyFace from "../../img/happy-face.png";
 import neutralFace from "../../img/neutral-face.png";
 import sadFace from "../../img/sad-face.png";
 import logo from "../../img/logo.png";
+import { Statistics } from "./Statistics";
 
 const today = format(new Date(), "dd-MM-yyyy");
 
@@ -55,17 +56,13 @@ export const Dashboard = () => {
         {localStorage.getItem("role") === Roles.Manager && (
           <>
             <PrimaryButton onClick={() => setModalOpen(!modalOpen)}>
-              Open Modal
+              Statistics
             </PrimaryButton>
-            <Modal
+            <Statistics
               isOpen={modalOpen}
-              contentLabel="Example Modal"
-              ariaHideApp={false}
-            >
-              <PrimaryButton onClick={() => setModalOpen(false)}>
-                Close Modal
-              </PrimaryButton>
-            </Modal>
+              setIsOpen={setModalOpen}
+              // ariaHideApp={false}
+            />
           </>
         )}
         <SecondaryButton onClick={() => logout()}>Logout</SecondaryButton>

@@ -4,6 +4,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
+import { ModalProvider } from "styled-react-modal";
 import { theme } from "./theme";
 import { GlobalStyle } from "./globalStyle";
 import {
@@ -40,10 +41,12 @@ ReactDOM.render(
     <ApolloProvider client={client}>
       <ApolloHooksProvider client={client}>
         <ThemeProvider theme={theme}>
-          <BrowserRouter>
-            <GlobalStyle />
-            <App />
-          </BrowserRouter>
+          <ModalProvider>
+            <BrowserRouter>
+              <GlobalStyle />
+              <App />
+            </BrowserRouter>
+          </ModalProvider>
         </ThemeProvider>
       </ApolloHooksProvider>
     </ApolloProvider>

@@ -8,5 +8,5 @@ export const TopBarStyled = styled.div`
   flex-direction: row;
   justify-content: flex-end;
   padding: 10px;
-  z-index: 99;
+  z-index: 10;
 `;

@@ -7,4 +7,10 @@ export const Dashboard = gql`
       value
     }
   }
+  query getAllEntries {
+    getAllEntries {
+      date
+      value
+    }
+  }
 `;

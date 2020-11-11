@@ -107,6 +107,17 @@ export type AddEntryMutation = (
   )> }
 );
 
+export type GetAllEntriesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllEntriesQuery = (
+  { __typename?: 'Query' }
+  & { getAllEntries?: Maybe<Array<Maybe<(
+    { __typename?: 'Entry' }
+    & Pick<Entry, 'date' | 'value'>
+  )>>> }
+);
+
 
 export const LoginDocument = gql`
     mutation login($username: String!, $password: String!) {
@@ -176,3 +187,36 @@ export function useAddEntryMutation(baseOptions?: Apollo.MutationHookOptions<Add
 export type AddEntryMutationHookResult = ReturnType<typeof useAddEntryMutation>;
 export type AddEntryMutationResult = Apollo.MutationResult<AddEntryMutation>;
 export type AddEntryMutationOptions = Apollo.BaseMutationOptions<AddEntryMutation, AddEntryMutationVariables>;
+export const GetAllEntriesDocument = gql`
+    query getAllEntries {
+  getAllEntries {
+    date
+    value
+  }
+}
+    `;
+
+/**
+ * __useGetAllEntriesQuery__
+ *
+ * To run a query within a React component, call `useGetAllEntriesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllEntriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllEntriesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllEntriesQuery(baseOptions?: Apollo.QueryHookOptions<GetAllEntriesQuery, GetAllEntriesQueryVariables>) {
+        return Apollo.useQuery<GetAllEntriesQuery, GetAllEntriesQueryVariables>(GetAllEntriesDocument, baseOptions);
+      }
+export function useGetAllEntriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllEntriesQuery, GetAllEntriesQueryVariables>) {
+          return Apollo.useLazyQuery<GetAllEntriesQuery, GetAllEntriesQueryVariables>(GetAllEntriesDocument, baseOptions);
+        }
+export type GetAllEntriesQueryHookResult = ReturnType<typeof useGetAllEntriesQuery>;
+export type GetAllEntriesLazyQueryHookResult = ReturnType<typeof useGetAllEntriesLazyQuery>;
+export type GetAllEntriesQueryResult = Apollo.QueryResult<GetAllEntriesQuery, GetAllEntriesQueryVariables>;
