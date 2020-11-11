@@ -11,5 +11,5 @@ export const ImageCard = ({
   shadowColor,
   ...props
 }: ImageCardProps) => {
-  return <Image src={imgSrc} shadowColor={shadowColor} />;
+  return <Image src={imgSrc} shadowColor={shadowColor} {...props} />;
 };

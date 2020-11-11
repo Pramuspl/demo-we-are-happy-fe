@@ -2,6 +2,7 @@ import { ApolloError } from "@apollo/client";
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import Modal from "react-modal";
+import { format } from "date-fns";
 import {
   ImageCard,
   PrimaryButton,
@@ -14,17 +15,28 @@ import {
   Roles,
   useAddEntryMutation,
 } from "../../generated/graphql";
-import { DashboardContainer } from "./Dashboard.styled";
+import {
+  DashboardContainer,
+  VoteConfirmation,
+  VoteContainer,
+  Logo,
+  VoteCardsContainer,
+  Text,
+} from "./Dashboard.styled";
 import happyFace from "../../img/happy-face.png";
 import neutralFace from "../../img/neutral-face.png";
 import sadFace from "../../img/sad-face.png";
+import logo from "../../img/logo.png";
+
+const today = format(new Date(), "dd-MM-yyyy");
 
 export const Dashboard = () => {
   const [loggedIn, setLoggedIn] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
+  const [voted, setVoted] = useState(false);
 
   const [addEntryMutation] = useAddEntryMutation({
-    onCompleted: (data: AddEntryMutation) => console.log(data),
+    onCompleted: (data: AddEntryMutation) => setVoted(true),
     onError: (error: ApolloError) => console.log(error.message),
   });
 
@@ -59,42 +71,51 @@ export const Dashboard = () => {
         <SecondaryButton onClick={() => logout()}>Logout</SecondaryButton>
       </TopBar>
       <DashboardContainer>
-        <ImageCard
-          imgSrc={happyFace}
-          shadowColor="#08AC00"
-          onClick={() =>
-            addEntryMutation({
-              variables: {
-                date: "10-10-2002",
-                value: Moods.Bad,
-              },
-            })
-          }
-        />
-        <ImageCard
-          imgSrc={neutralFace}
-          shadowColor="#FCBA03"
-          onClick={() =>
-            addEntryMutation({
-              variables: {
-                date: "10-10-2002",
-                value: Moods.Neutral,
-              },
-            })
-          }
-        />
-        <ImageCard
-          imgSrc={sadFace}
-          shadowColor="#E74C3C"
-          onClick={() =>
-            addEntryMutation({
-              variables: {
-                date: "10-10-2002",
-                value: Moods.Good,
-              },
-            })
-          }
-        />
+        <VoteConfirmation className={voted ? "voted" : ""}>
+          <Logo src={logo} alt="logo" />
+          Thank you for your vote!
+        </VoteConfirmation>
+        <VoteContainer className={voted ? "voted" : ""}>
+          <Text>How did you feel today?</Text>
+          <VoteCardsContainer>
+            <ImageCard
+              imgSrc={happyFace}
+              shadowColor="#08AC00"
+              onClick={() =>
+                addEntryMutation({
+                  variables: {
+                    date: today,
+                    value: Moods.Bad,
+                  },
+                })
+              }
+            />
+            <ImageCard
+              imgSrc={neutralFace}
+              shadowColor="#FCBA03"
+              onClick={() =>
+                addEntryMutation({
+                  variables: {
+                    date: today,
+                    value: Moods.Neutral,
+                  },
+                })
+              }
+            />
+            <ImageCard
+              imgSrc={sadFace}
+              shadowColor="#E74C3C"
+              onClick={() =>
+                addEntryMutation({
+                  variables: {
+                    date: today,
+                    value: Moods.Good,
+                  },
+                })
+              }
+            />
+          </VoteCardsContainer>
+        </VoteContainer>
       </DashboardContainer>
     </>
   );
