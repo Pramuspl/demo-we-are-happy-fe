@@ -82,7 +82,7 @@ export const Dashboard = () => {
                 addEntryMutation({
                   variables: {
                     date: today,
-                    value: Moods.Bad,
+                    value: Moods.BAD,
                   },
                 })
               }
@@ -94,7 +94,7 @@ export const Dashboard = () => {
                 addEntryMutation({
                   variables: {
                     date: today,
-                    value: Moods.Neutral,
+                    value: Moods.NEUTRAL,
                   },
                 })
               }
@@ -106,7 +106,7 @@ export const Dashboard = () => {
                 addEntryMutation({
                   variables: {
                     date: today,
-                    value: Moods.Good,
+                    value: Moods.GOOD,
                   },
                 })
               }
