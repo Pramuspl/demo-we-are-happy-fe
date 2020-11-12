@@ -7,8 +7,8 @@ export const Dashboard = gql`
       value
     }
   }
-  query getAllEntries {
-    getAllEntries {
+  query getAllEntries($from: String, $to: String) {
+    getAllEntries(from: $from, to: $to) {
       date
       value
     }

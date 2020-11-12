@@ -9,6 +9,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** Date custom scalar type */
+  Date: any;
 };
 
 export enum Roles {
@@ -61,10 +63,11 @@ export enum Moods {
   Good = 'GOOD'
 }
 
+
 export type Entry = {
   __typename?: 'Entry';
   _id: Scalars['String'];
-  date: Scalars['String'];
+  date: Scalars['Date'];
   value: Moods;
 };
 
@@ -77,6 +80,12 @@ export type Query = {
 
 export type QueryGetEntryArgs = {
   entryID: Scalars['String'];
+};
+
+
+export type QueryGetAllEntriesArgs = {
+  from?: Maybe<Scalars['String']>;
+  to?: Maybe<Scalars['String']>;
 };
 
 export type LoginMutationVariables = Exact<{
@@ -107,7 +116,10 @@ export type AddEntryMutation = (
   )> }
 );
 
-export type GetAllEntriesQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetAllEntriesQueryVariables = Exact<{
+  from?: Maybe<Scalars['String']>;
+  to?: Maybe<Scalars['String']>;
+}>;
 
 
 export type GetAllEntriesQuery = (
@@ -188,8 +200,8 @@ export type AddEntryMutationHookResult = ReturnType<typeof useAddEntryMutation>;
 export type AddEntryMutationResult = Apollo.MutationResult<AddEntryMutation>;
 export type AddEntryMutationOptions = Apollo.BaseMutationOptions<AddEntryMutation, AddEntryMutationVariables>;
 export const GetAllEntriesDocument = gql`
-    query getAllEntries {
-  getAllEntries {
+    query getAllEntries($from: String, $to: String) {
+  getAllEntries(from: $from, to: $to) {
     date
     value
   }
@@ -208,6 +220,8 @@ export const GetAllEntriesDocument = gql`
  * @example
  * const { data, loading, error } = useGetAllEntriesQuery({
  *   variables: {
+ *      from: // value for 'from'
+ *      to: // value for 'to'
  *   },
  * });
  */

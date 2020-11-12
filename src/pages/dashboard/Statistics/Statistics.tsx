@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { PieChart } from "react-minimal-pie-chart";
-import { parse, isBefore, subDays, subMonths, subYears } from "date-fns";
+import { parse, isAfter, subDays, subMonths, subYears } from "date-fns";
 
 import { Moods } from "../../../generated/graphql";
 import { PrimaryButton } from "../../../components";
@@ -20,13 +20,7 @@ export const Statistics = ({ setIsOpen, ...props }: StatisticsProps) => {
   useEffect(() => {
     if (data && data.getAllEntries) {
       data.getAllEntries.forEach((entry) => {
-        if (
-          entry &&
-          isBefore(
-            parse(entry.date, "dd-MM-yyyy", new Date()),
-            subYears(new Date(), 1)
-          )
-        ) {
+        if (entry) {
           occurences.set(
             `${entry.value}`,
             (occurences.get(`${entry.value}`) || 0) + 1
