@@ -75,7 +75,7 @@ const MoodChart = ({
       <ChartTitle>{title}</ChartTitle>
       <PieChart
         data={data}
-        label={({ dataEntry }) => dataEntry.value}
+        label={({ dataEntry }) => dataEntry.value || ""}
         lineWidth={50}
         segmentsShift={1}
         labelPosition={75}

@@ -12,7 +12,9 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
 };
 
-type DropdownProps = InputProps & {
+type DropdownProps = React.SelectHTMLAttributes<HTMLSelectElement> & {
+  id?: string;
+  label?: string;
   options: { text: string; value: string }[];
 };
 
@@ -48,11 +50,11 @@ export const Password = ({ id, label, ...props }: InputProps) => {
   );
 };
 
-export const Dropdown = ({ id, label, options }: DropdownProps) => {
+export const Dropdown = ({ id, label, options, ...props }: DropdownProps) => {
   return (
     <InputContainer>
       {label && <label htmlFor={id}>{label}</label>}
-      <StyledSelect>
+      <StyledSelect {...props}>
         {options.map((opt) => (
           <option value={opt.value} key={opt.value}>
             {opt.text}

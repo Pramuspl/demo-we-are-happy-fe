@@ -1,8 +1,6 @@
 import { ApolloError } from "@apollo/client";
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-
-import { format } from "date-fns";
 import {
   ImageCard,
   PrimaryButton,
@@ -29,7 +27,7 @@ import sadFace from "../../img/sad-face.png";
 import logo from "../../img/logo.png";
 import { Statistics } from "./Statistics";
 
-const today = format(new Date(), "dd-MM-yyyy");
+const today = new Date().toISOString();
 
 export const Dashboard = () => {
   const [loggedIn, setLoggedIn] = useState(true);
@@ -78,7 +76,7 @@ export const Dashboard = () => {
                 addEntryMutation({
                   variables: {
                     date: today,
-                    value: Moods.Bad,
+                    value: Moods.Good,
                   },
                 })
               }
@@ -102,7 +100,7 @@ export const Dashboard = () => {
                 addEntryMutation({
                   variables: {
                     date: today,
-                    value: Moods.Good,
+                    value: Moods.Bad,
                   },
                 })
               }
