@@ -12,14 +12,16 @@ export const BaseButton = styled.button`
   border-radius: ${({ theme }) => theme.borderRadius};
   transition: 0.3s linear;
   &:hover {
-    opacity: 80%;
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.primary};
+  }
+  &:focus {
+    outline: none;
   }
 `;
 
 export const PrimaryButton = styled(BaseButton)`
   background: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.secondary};
-  border: ${({ theme }) => `1px solid ${theme.colors.secondary}`};
 `;
 
 export const SecondaryButton = styled(BaseButton)`

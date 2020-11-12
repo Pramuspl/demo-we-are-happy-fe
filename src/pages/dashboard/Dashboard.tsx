@@ -58,11 +58,7 @@ export const Dashboard = () => {
             <PrimaryButton onClick={() => setModalOpen(!modalOpen)}>
               Statistics
             </PrimaryButton>
-            <Statistics
-              isOpen={modalOpen}
-              setIsOpen={setModalOpen}
-              // ariaHideApp={false}
-            />
+            <Statistics isOpen={modalOpen} setIsOpen={setModalOpen} />
           </>
         )}
         <SecondaryButton onClick={() => logout()}>Logout</SecondaryButton>
@@ -82,7 +78,7 @@ export const Dashboard = () => {
                 addEntryMutation({
                   variables: {
                     date: today,
-                    value: Moods.BAD,
+                    value: Moods.Bad,
                   },
                 })
               }
@@ -94,7 +90,7 @@ export const Dashboard = () => {
                 addEntryMutation({
                   variables: {
                     date: today,
-                    value: Moods.NEUTRAL,
+                    value: Moods.Neutral,
                   },
                 })
               }
@@ -106,7 +102,7 @@ export const Dashboard = () => {
                 addEntryMutation({
                   variables: {
                     date: today,
-                    value: Moods.GOOD,
+                    value: Moods.Good,
                   },
                 })
               }

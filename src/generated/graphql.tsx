@@ -1,9 +1,7 @@
-import { gql } from "@apollo/client";
-import * as Apollo from "@apollo/client";
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -16,115 +14,147 @@ export type Scalars = {
 };
 
 export enum Roles {
-  Employee = "EMPLOYEE",
-  Manager = "MANAGER",
+  Employee = 'EMPLOYEE',
+  Manager = 'MANAGER'
 }
 
 export type Auth = {
-  __typename?: "Auth";
+  __typename?: 'Auth';
   role: Roles;
-  access_token: Scalars["String"];
+  access_token: Scalars['String'];
 };
 
 export type User = {
-  __typename?: "User";
-  _id: Scalars["String"];
-  username: Scalars["String"];
+  __typename?: 'User';
+  _id: Scalars['String'];
+  username: Scalars['String'];
   role: Roles;
 };
 
 export type Mutation = {
-  __typename?: "Mutation";
+  __typename?: 'Mutation';
   login: Auth;
   register: User;
   addEntry?: Maybe<Entry>;
 };
 
+
 export type MutationLoginArgs = {
-  username: Scalars["String"];
-  password: Scalars["String"];
+  username: Scalars['String'];
+  password: Scalars['String'];
 };
 
+
 export type MutationRegisterArgs = {
-  username: Scalars["String"];
-  password: Scalars["String"];
+  username: Scalars['String'];
+  password: Scalars['String'];
   role?: Maybe<Roles>;
 };
 
+
 export type MutationAddEntryArgs = {
-  date: Scalars["String"];
+  date: Scalars['String'];
   value: Moods;
 };
 
 export enum Moods {
-  BAD = "BAD",
-  NEUTRAL = "NEUTRAL",
-  GOOD = "GOOD",
+  Bad = 'BAD',
+  Neutral = 'NEUTRAL',
+  Good = 'GOOD'
 }
 
+
 export type Entry = {
-  __typename?: "Entry";
-  _id: Scalars["String"];
-  date: Scalars["Date"];
+  __typename?: 'Entry';
+  _id: Scalars['String'];
+  date: Scalars['Date'];
   value: Moods;
 };
 
 export type Query = {
-  __typename?: "Query";
+  __typename?: 'Query';
   getEntry?: Maybe<Entry>;
   getAllEntries?: Maybe<Array<Maybe<Entry>>>;
 };
 
+
 export type QueryGetEntryArgs = {
-  entryID: Scalars["String"];
+  entryID: Scalars['String'];
 };
 
+
 export type QueryGetAllEntriesArgs = {
-  from?: Maybe<Scalars["String"]>;
-  to?: Maybe<Scalars["String"]>;
+  from?: Maybe<Scalars['String']>;
+  to?: Maybe<Scalars['String']>;
 };
 
 export type LoginMutationVariables = Exact<{
-  username: Scalars["String"];
-  password: Scalars["String"];
+  username: Scalars['String'];
+  password: Scalars['String'];
 }>;
 
-export type LoginMutation = { __typename?: "Mutation" } & {
-  login: { __typename?: "Auth" } & Pick<Auth, "access_token" | "role">;
-};
+
+export type LoginMutation = (
+  { __typename?: 'Mutation' }
+  & { login: (
+    { __typename?: 'Auth' }
+    & Pick<Auth, 'access_token' | 'role'>
+  ) }
+);
+
+export type RegisterMutationVariables = Exact<{
+  username: Scalars['String'];
+  password: Scalars['String'];
+  role: Roles;
+}>;
+
+
+export type RegisterMutation = (
+  { __typename?: 'Mutation' }
+  & { register: (
+    { __typename?: 'User' }
+    & Pick<User, 'username' | 'role'>
+  ) }
+);
 
 export type AddEntryMutationVariables = Exact<{
-  date: Scalars["String"];
+  date: Scalars['String'];
   value: Moods;
 }>;
 
-export type AddEntryMutation = { __typename?: "Mutation" } & {
-  addEntry?: Maybe<{ __typename?: "Entry" } & Pick<Entry, "date" | "value">>;
-};
+
+export type AddEntryMutation = (
+  { __typename?: 'Mutation' }
+  & { addEntry?: Maybe<(
+    { __typename?: 'Entry' }
+    & Pick<Entry, 'date' | 'value'>
+  )> }
+);
 
 export type GetAllEntriesQueryVariables = Exact<{
-  from?: Maybe<Scalars["String"]>;
-  to?: Maybe<Scalars["String"]>;
+  from?: Maybe<Scalars['String']>;
+  to?: Maybe<Scalars['String']>;
 }>;
 
-export type GetAllEntriesQuery = { __typename?: "Query" } & {
-  getAllEntries?: Maybe<
-    Array<Maybe<{ __typename?: "Entry" } & Pick<Entry, "date" | "value">>>
-  >;
-};
+
+export type GetAllEntriesQuery = (
+  { __typename?: 'Query' }
+  & { getAllEntries?: Maybe<Array<Maybe<(
+    { __typename?: 'Entry' }
+    & Pick<Entry, 'date' | 'value'>
+  )>>> }
+);
+
 
 export const LoginDocument = gql`
-  mutation login($username: String!, $password: String!) {
-    login(username: $username, password: $password) {
-      access_token
-      role
-    }
+    mutation login($username: String!, $password: String!) {
+  login(username: $username, password: $password) {
+    access_token
+    role
   }
-`;
-export type LoginMutationFn = Apollo.MutationFunction<
-  LoginMutation,
-  LoginMutationVariables
->;
+}
+    `;
+export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutationVariables>;
 
 /**
  * __useLoginMutation__
@@ -144,35 +174,56 @@ export type LoginMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useLoginMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    LoginMutation,
-    LoginMutationVariables
-  >
-) {
-  return Apollo.useMutation<LoginMutation, LoginMutationVariables>(
-    LoginDocument,
-    baseOptions
-  );
-}
+export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
+        return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, baseOptions);
+      }
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
-export type LoginMutationOptions = Apollo.BaseMutationOptions<
-  LoginMutation,
-  LoginMutationVariables
->;
-export const AddEntryDocument = gql`
-  mutation addEntry($date: String!, $value: Moods!) {
-    addEntry(date: $date, value: $value) {
-      date
-      value
-    }
+export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export const RegisterDocument = gql`
+    mutation register($username: String!, $password: String!, $role: Roles!) {
+  register(username: $username, password: $password, role: $role) {
+    username
+    role
   }
-`;
-export type AddEntryMutationFn = Apollo.MutationFunction<
-  AddEntryMutation,
-  AddEntryMutationVariables
->;
+}
+    `;
+export type RegisterMutationFn = Apollo.MutationFunction<RegisterMutation, RegisterMutationVariables>;
+
+/**
+ * __useRegisterMutation__
+ *
+ * To run a mutation, you first call `useRegisterMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRegisterMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [registerMutation, { data, loading, error }] = useRegisterMutation({
+ *   variables: {
+ *      username: // value for 'username'
+ *      password: // value for 'password'
+ *      role: // value for 'role'
+ *   },
+ * });
+ */
+export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<RegisterMutation, RegisterMutationVariables>) {
+        return Apollo.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, baseOptions);
+      }
+export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
+export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
+export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
+export const AddEntryDocument = gql`
+    mutation addEntry($date: String!, $value: Moods!) {
+  addEntry(date: $date, value: $value) {
+    date
+    value
+  }
+}
+    `;
+export type AddEntryMutationFn = Apollo.MutationFunction<AddEntryMutation, AddEntryMutationVariables>;
 
 /**
  * __useAddEntryMutation__
@@ -192,31 +243,20 @@ export type AddEntryMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useAddEntryMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    AddEntryMutation,
-    AddEntryMutationVariables
-  >
-) {
-  return Apollo.useMutation<AddEntryMutation, AddEntryMutationVariables>(
-    AddEntryDocument,
-    baseOptions
-  );
-}
+export function useAddEntryMutation(baseOptions?: Apollo.MutationHookOptions<AddEntryMutation, AddEntryMutationVariables>) {
+        return Apollo.useMutation<AddEntryMutation, AddEntryMutationVariables>(AddEntryDocument, baseOptions);
+      }
 export type AddEntryMutationHookResult = ReturnType<typeof useAddEntryMutation>;
 export type AddEntryMutationResult = Apollo.MutationResult<AddEntryMutation>;
-export type AddEntryMutationOptions = Apollo.BaseMutationOptions<
-  AddEntryMutation,
-  AddEntryMutationVariables
->;
+export type AddEntryMutationOptions = Apollo.BaseMutationOptions<AddEntryMutation, AddEntryMutationVariables>;
 export const GetAllEntriesDocument = gql`
-  query getAllEntries($from: String, $to: String) {
-    getAllEntries(from: $from, to: $to) {
-      date
-      value
-    }
+    query getAllEntries($from: String, $to: String) {
+  getAllEntries(from: $from, to: $to) {
+    date
+    value
   }
-`;
+}
+    `;
 
 /**
  * __useGetAllEntriesQuery__
@@ -235,35 +275,12 @@ export const GetAllEntriesDocument = gql`
  *   },
  * });
  */
-export function useGetAllEntriesQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    GetAllEntriesQuery,
-    GetAllEntriesQueryVariables
-  >
-) {
-  return Apollo.useQuery<GetAllEntriesQuery, GetAllEntriesQueryVariables>(
-    GetAllEntriesDocument,
-    baseOptions
-  );
-}
-export function useGetAllEntriesLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    GetAllEntriesQuery,
-    GetAllEntriesQueryVariables
-  >
-) {
-  return Apollo.useLazyQuery<GetAllEntriesQuery, GetAllEntriesQueryVariables>(
-    GetAllEntriesDocument,
-    baseOptions
-  );
-}
-export type GetAllEntriesQueryHookResult = ReturnType<
-  typeof useGetAllEntriesQuery
->;
-export type GetAllEntriesLazyQueryHookResult = ReturnType<
-  typeof useGetAllEntriesLazyQuery
->;
-export type GetAllEntriesQueryResult = Apollo.QueryResult<
-  GetAllEntriesQuery,
-  GetAllEntriesQueryVariables
->;
+export function useGetAllEntriesQuery(baseOptions?: Apollo.QueryHookOptions<GetAllEntriesQuery, GetAllEntriesQueryVariables>) {
+        return Apollo.useQuery<GetAllEntriesQuery, GetAllEntriesQueryVariables>(GetAllEntriesDocument, baseOptions);
+      }
+export function useGetAllEntriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllEntriesQuery, GetAllEntriesQueryVariables>) {
+          return Apollo.useLazyQuery<GetAllEntriesQuery, GetAllEntriesQueryVariables>(GetAllEntriesDocument, baseOptions);
+        }
+export type GetAllEntriesQueryHookResult = ReturnType<typeof useGetAllEntriesQuery>;
+export type GetAllEntriesLazyQueryHookResult = ReturnType<typeof useGetAllEntriesLazyQuery>;
+export type GetAllEntriesQueryResult = Apollo.QueryResult<GetAllEntriesQuery, GetAllEntriesQueryVariables>;

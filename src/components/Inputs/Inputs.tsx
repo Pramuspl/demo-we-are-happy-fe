@@ -54,7 +54,9 @@ export const Dropdown = ({ id, label, options }: DropdownProps) => {
       {label && <label htmlFor={id}>{label}</label>}
       <StyledSelect>
         {options.map((opt) => (
-          <option value={opt.value}>{opt.text}</option>
+          <option value={opt.value} key={opt.value}>
+            {opt.text}
+          </option>
         ))}
       </StyledSelect>
     </InputContainer>

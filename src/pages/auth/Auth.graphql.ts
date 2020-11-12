@@ -7,4 +7,11 @@ export const Auth = gql`
       role
     }
   }
+
+  mutation register($username: String!, $password: String!, $role: Roles!) {
+    register(username: $username, password: $password, role: $role) {
+      username
+      role
+    }
+  }
 `;

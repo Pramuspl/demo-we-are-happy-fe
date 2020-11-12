@@ -30,7 +30,7 @@ export const StyledInput = styled.input`
 
   &:active,
   &:hover {
-    border: 1px solid ${({ theme }) => theme.colors.primary};
+    box-shadow: 0 0 0 1px ${({ theme }) => theme.colors.primary};
   }
 
   &:focus {
@@ -44,21 +44,25 @@ export const StyledInput = styled.input`
 
 export const StyledSelect = styled.select`
   box-sizing: border-box;
-  color: ${({ theme }) => theme.colors.accentPrimary};
+  color: ${({ theme }) => theme.colors.primary};
   font-size: 16px;
   height: 38px;
   width: 100%;
-  border: 1px solid #c4c4e8;
+  border: 1px solid ${({ theme }) => theme.colors.primary};
   border-radius: 4px;
   padding: 0 10px;
 
   &:active,
   &:hover {
-    border: 1px solid ${({ theme }) => theme.colors.primary};
+    box-shadow: 0 0 0 1px ${({ theme }) => theme.colors.primary};
+  }
+
+  &:focus {
+    outline-color: ${({ theme }) => theme.colors.primary};
   }
 
   &::placeholder {
-    color: #c4c4e8;
+    color: ${({ theme }) => theme.colors.primary};
   }
 `;
 
